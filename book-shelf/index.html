@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图书收藏</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: sans-serif; max-width: 520px; margin: 24px auto; padding: 0 16px; }
+    form { display: flex; flex-wrap: wrap; gap: 8px; }
+    input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    #title { flex: 2 1 120px; }
+    #author { flex: 1 1 90px; }
+    #score { width: 70px; }
+    button { padding: 8px 14px; cursor: pointer; }
+    .tip { color: #c00; font-size: 14px; min-height: 20px; }
+    #search { width: 100%; margin: 12px 0; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 8px 0; border-bottom: 1px solid #eee; }
+    li button { margin-left: 8px; font-size: 13px; padding: 4px 10px; }
+  </style>
+</head>
+<body>
+  <h1>图书收藏</h1>
+  <form id="book-form">
+    <input type="text" id="title" placeholder="书名">
+    <input type="text" id="author" placeholder="作者">
+    <input type="number" id="score" placeholder="评分" min="1" max="5">
+    <button type="submit" id="submit-btn">添加</button>
+  </form>
+  <p class="tip" id="tip"></p>
+  <input type="search" id="search" placeholder="按书名或作者搜索…">
+  <ul id="book-list"></ul>
+  <script src="app.js"></script>
+</body>
+</html>
