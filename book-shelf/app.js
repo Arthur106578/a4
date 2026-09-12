@@ -3,7 +3,6 @@ const form = document.querySelector('#book-form');
 const titleInput = document.querySelector('#title');
 const authorInput = document.querySelector('#author');
 const scoreInput = document.querySelector('#score');
-const searchInput = document.querySelector('#search');
 const tip = document.querySelector('#tip');
 const list = document.querySelector('#book-list');
 const submitBtn = document.querySelector('#submit-btn');
@@ -13,20 +12,16 @@ let editIndex = -1;   // -1 表示新增模式，>=0 表示正在修改该位置
 
 const save = () => localStorage.setItem('books', JSON.stringify(books));
 
-// 统一渲染：按关键词过滤后由数组决定列表（先改数组、再调 render）
+// 统一渲染：列表始终由 books 数组决定（先改数组、再调 render）
 const render = () => {
-  const keyword = searchInput.value.trim();
-  const shown = books.filter(b =>
-    keyword === '' || b.title.includes(keyword) || b.author.includes(keyword)
-  );
   list.innerHTML = '';
-  if (shown.length === 0) {
+  if (books.length === 0) {
     const li = document.createElement('li');
-    li.textContent = '没有匹配的图书';
+    li.textContent = '书架空空，先添加一本吧';
     list.appendChild(li);
     return;
   }
-  shown.forEach(book => {
+  books.forEach(book => {
     const li = document.createElement('li');
     const span = document.createElement('span');
     span.textContent = `《${book.title}》 ${book.author} · ${'★'.repeat(book.score)}`;
@@ -96,8 +91,5 @@ form.addEventListener('submit', (e) => {
   form.reset();
   render();
 });
-
-// 搜索：输入即过滤（查询功能）
-searchInput.addEventListener('input', render);
 
 render();
